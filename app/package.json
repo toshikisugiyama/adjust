@@ -1,6 +1,11 @@
 {
   "name": "sort",
   "private": true,
+  "person": {
+    "name": "sugiyamatoshiki",
+    "email": "s.toshiki.llwz8869@gmail.com",
+    "url": ""
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
