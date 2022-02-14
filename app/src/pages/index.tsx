@@ -47,29 +47,31 @@ const Home: NextPage = () => {
 
   const adjustedContent = useMemo(() => {
     if (Array.isArray(contentValue)) return ''
-    let target = contentValue
-    const convert = (separator: string) => {
+    let target: string = contentValue.replace(/\r?\n/g, '\n')
+    const convert = (
+      separator: string,
+      noChangeLine?: boolean,
+    ) => {
       target = target
-        .replace(/\r?\n/g, ':::')
+        .replace(/\n/g, ':::\n:::')
         .split(':::')
         .reduce((acc: string[], cur) => {
-          return !!cur.length
-            ? [...acc, cur.replace(/[,|;]/g, '')]
-            : acc
+          if (!cur.length) return acc
+          return cur !== '\n'
+            ? [...acc, `${cur}${separator}${!noChangeLine ? '\n' : ''}`]
+            : [...acc, cur]
         }, [])
-        .join(separator)
+        .join('')
+      console.log({target})
+      return target
     }
-    if (optionValue1.includes('cepalate-with-comma')) {
-      convert(',\n')
-    }
-    if (optionValue1.includes('remove-empty-line')) {
-      convert('\n')
-    }
-    if (optionValue1.includes('no-change-line')) {
-      convert(', ')
-    }
+    if (optionValue1.includes('remove-empty-line')) convert('\n')
+    if (optionValue1.includes('no-change-line')) convert(' ')
+    if (optionValue2.includes('not-cepalate')) convert(' ', optionValue1.includes('no-change-line'))
+    if (optionValue2.includes('cepalate-with-comma')) convert(', ', optionValue1.includes('no-change-line'))
+    if (optionValue2.includes('cepalate-with-semicolon')) convert('; ', optionValue1.includes('no-change-line'))
     return target
-  }, [optionValue1, contentValue])
+  }, [optionValue1, optionValue2, contentValue])
 
   return (
     <Layout>
