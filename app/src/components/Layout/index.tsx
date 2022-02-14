@@ -16,13 +16,15 @@ export const Layout: VFC<Props> = ({ children }) => {
         <title>{title}</title>
       </Head>
       <Header />
-      <main className='bg-gray-50'>
+      <main className='
+        bg-gray-50
+        h-main
+        overflow-auto
+      '>
         <div className='
           w-container
           mx-auto
           py-[60px]
-          min-h-main
-          overflow-auto
         '>{children}</div>
       </main>
       <Footer />

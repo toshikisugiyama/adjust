@@ -10,10 +10,8 @@ module.exports = {
       height: {
         'header': 'var(--header-height)',
         'footer': 'var(--footer-height)',
-      },
-      minHeight: {
         'main': 'calc(100vh - var(--header-height) - var(--footer-height))',
-      }
+      },
     },
   },
   plugins: [],
