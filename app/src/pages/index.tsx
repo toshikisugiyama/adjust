@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
-import { Layout } from '@/src/components/Layout'
-import { useForm } from '@/src/hooks/useForm'
-import { TextBoxItem } from '@/src/components/UiParts/TextBoxItem'
-import { CheckBoxItem } from '@/src/components/UiParts/CheckBoxItem'
-import { Checkbox } from '@/src/types'
+import { Layout } from '@/components/Layout'
+import { useForm } from '@/hooks/useForm'
+import { TextBoxItem } from '@/components/UiParts/TextBoxItem'
+import { CheckBoxItem } from '@/components/UiParts/CheckBoxItem'
+import { Checkbox } from '@/types'
 import { useMemo } from 'react'
-import { useAppInfo } from '../hooks/useAppInfo'
+import { useAppInfo } from '@/hooks/useAppInfo'
 
 const Home: NextPage = () => {
 

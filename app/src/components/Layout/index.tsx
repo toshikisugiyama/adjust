@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import { VFC, ReactNode } from 'react'
-import { Header } from '@/src/components/UiParts/Header'
-import { Footer } from '@/src/components/UiParts/Footer'
-import { useAppInfo } from '@/src/hooks/useAppInfo'
+import { Header } from '@/components/UiParts/Header'
+import { Footer } from '@/components/UiParts/Footer'
+import { useAppInfo } from '@/hooks/useAppInfo'
 
 type Props = {
   children: ReactNode;

@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
-import { Checkbox } from '../types'
+import { Checkbox } from '@/types'
 
 /**
  * フォームのフック

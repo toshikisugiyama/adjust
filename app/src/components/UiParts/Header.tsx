@@ -1,4 +1,4 @@
-import { useAppInfo } from '@/src/hooks/useAppInfo'
+import { useAppInfo } from '@/hooks/useAppInfo'
 import { memo, VFC } from 'react'
 
 export const Header: VFC = memo(() => {
