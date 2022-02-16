@@ -4,6 +4,7 @@ type Props = {
   type: 'text' | 'textarea';
   label: string;
   id: string;
+  value: string;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
@@ -25,6 +26,7 @@ export const TextBoxItem: VFC<Props> = memo(props => {
               cols={30}
               rows={10}
               className='border p-5'
+              value={props.value}
             ></textarea>
           )
       }

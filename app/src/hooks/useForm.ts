@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import { ChangeEvent, MouseEvent, useCallback, useEffect, useState } from 'react'
 import { Checkbox } from '@/types'
 
 /**
@@ -32,6 +32,13 @@ export const useForm = (group?: Checkbox[]) => {
     setVal(item => (<string[]>item).filter(item => item !== id))
   }, [val, group])
 
+  const reset = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    console.log('aaaa')
+    if (!val.length) return
+    setVal('')
+  }, [val])
+
   useEffect(() => {
     if (group != null && !val.length) {
       setVal(() => [group[0].id])
@@ -41,5 +48,6 @@ export const useForm = (group?: Checkbox[]) => {
   return {
     val,
     handleForm,
+    reset,
   }
 }

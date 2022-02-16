@@ -44,6 +44,7 @@ const Home: NextPage = () => {
   const {
     val: contentValue,
     handleForm: handleContentForm,
+    reset: resetContentForm,
   } = useForm()
 
   const {
@@ -109,16 +110,30 @@ const Home: NextPage = () => {
       <div className='mt-10 border border-black p-5'>
         {
           !adjustedContent.length
-            ? <p className='text-center text-lg font-bold'>I will display the result here.</p>
+            ? <p className='text-center text-lg font-bold'>I will Display the Result Here.</p>
             : <pre>{adjustedContent}</pre>
         }
       </div>
       <form>
-        <div className='mt-10'>
+        <div className='mt-10 relative'>
+          <button
+            onClick={resetContentForm}
+            disabled={!contentValue.length}
+            className={`
+              absolute
+              top-0
+              right-0
+              text-gray-50
+              px-5
+              py-1.5
+              rounded-lg
+              ${!contentValue.length ? 'bg-gray-500' : 'bg-black hover:bg-gray-800'}
+          `}>Reset Me!</button>
           <TextBoxItem
-            label='Input texts!'
+            label='Input Texts Here!'
             id='content'
             type='textarea'
+            value={!Array.isArray(contentValue) ? contentValue : ''}
             onChange={handleContentForm}
           />
         </div>
