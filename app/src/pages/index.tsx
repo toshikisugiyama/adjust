@@ -4,8 +4,10 @@ import { useForm } from '@/hooks/useForm'
 import { TextBoxItem } from '@/components/UiParts/TextBoxItem'
 import { CheckBoxItem } from '@/components/UiParts/CheckBoxItem'
 import { Checkbox } from '@/types'
-import { MouseEvent, useCallback, useMemo } from 'react'
+import { MouseEvent, useCallback, useEffect, useMemo } from 'react'
 import { useAppInfo } from '@/hooks/useAppInfo'
+import { Button } from '@/components/UiParts/Button'
+import { useClipbord } from '@/hooks/useClipbord'
 
 const Home: NextPage = () => {
 
@@ -112,6 +114,13 @@ const Home: NextPage = () => {
     return target.join('')
   }, [contentValue, optionFilter1, optionFilter2, optionFilter3])
 
+  const initialMessage = 'Copy Me!'
+
+  const {
+    message,
+    copy,
+  } = useClipbord(adjustedContent, initialMessage)
+
   const reset = useCallback((e: MouseEvent<HTMLElement>) => {
     resetContentForm(e)
     resetOptionValue1(e)
@@ -126,7 +135,32 @@ const Home: NextPage = () => {
         font-bold
         text-center
       '>{title}</h1>
-      <div className='mt-10 border border-black p-5 rounded-lg'>
+      <div className='
+        mt-10
+        border
+        border-black
+        p-5
+        rounded-lg
+        relative
+      '>
+        {
+          !!adjustedContent.length &&
+            <div className='
+              absolute
+              top-1
+              right-1
+            '>
+              <Button
+                onClick={copy}
+                disabled={false}
+                text={message}
+                bgColor='bg-gray-300'
+                hoverBgColor='hover:bg-gray-400'
+                fontColor='text-black'
+                hoverFontColor='hover:text-gray-50'
+              />
+            </div>
+        }
         {
           !adjustedContent.length
             ? <p className='text-center text-lg font-bold'>I will Display the Result Here.</p>
@@ -135,19 +169,20 @@ const Home: NextPage = () => {
       </div>
       <form>
         <div className='mt-10 relative'>
-          <button
-            onClick={reset}
-            disabled={!contentValue.length}
-            className={`
-              absolute
-              top-0
-              right-0
-              text-gray-50
-              px-5
-              py-1.5
-              rounded-lg
-              ${!contentValue.length ? 'bg-gray-500' : 'bg-black hover:bg-gray-800'}
-          `}>Reset Me!</button>
+          <div className='
+            absolute
+            top-0
+            right-0
+          '>
+            <Button
+              onClick={reset}
+              disabled={!contentValue.length}
+              text='Reset Me!'
+              bgColor='bg-black'
+              hoverBgColor='hover:bg-gray-700'
+              fontColor='text-gray-50'
+            />
+          </div>
           <TextBoxItem
             label='Input Texts Here!'
             id='content'
