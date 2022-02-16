@@ -1,7 +1,7 @@
 import { useAppInfo } from '@/hooks/useAppInfo'
 import { memo, VFC } from 'react'
 
-export const Footer: VFC = memo(() => {
+export const Footer: VFC = memo(function FooterMemo() {
   const { name, year } = useAppInfo()
   return (
     <footer className='

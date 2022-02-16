@@ -109,7 +109,7 @@ const Home: NextPage = () => {
     let target: string[] = contentValue.replace(/\r?\n/g, `${dummy}\n${dummy}`).split(dummy)
     target = optionFilter3(optionFilter2(optionFilter1(target)))
     return target.join('')
-  }, [contentValue, optionValue1, optionFilter1, optionFilter2, optionFilter3])
+  }, [contentValue, optionFilter1, optionFilter2, optionFilter3])
 
   const reset = useCallback((e: MouseEvent<HTMLElement>) => {
     resetContentForm(e)
@@ -125,7 +125,7 @@ const Home: NextPage = () => {
         font-bold
         text-center
       '>{title}</h1>
-      <div className='mt-10 border border-black p-5'>
+      <div className='mt-10 border border-black p-5 rounded-lg'>
         {
           !adjustedContent.length
             ? <p className='text-center text-lg font-bold'>I will Display the Result Here.</p>
@@ -155,7 +155,7 @@ const Home: NextPage = () => {
             onChange={handleContentForm}
           />
         </div>
-        <div className='grid grid-cols-3 gap-4'>
+        <div className='grid grid-cols-3 gap-x-12 gap-y-4'>
           <div className='mt-10'>
             <CheckBoxItem
               label='Select Us!'

@@ -1,7 +1,7 @@
 import { useAppInfo } from '@/hooks/useAppInfo'
 import { memo, VFC } from 'react'
 
-export const Header: VFC = memo(() => {
+export const Header: VFC = memo(function HeaderMemo() {
   const { title } = useAppInfo()
   return (
     <header className='
