@@ -66,14 +66,15 @@ const Home: NextPage = () => {
   } = useForm(options3)
 
   const optionFilter1 = useCallback((texts: string[]): string[] => {
+    const filter = (target: string) => target.replace(/^[ |　]*/g, '').replace(/[;|,]$/g, '')
     if (optionValue1.includes('remove-empty-line')) {
       return texts.reduce((acc: string[], cur) => (
-        !['\n', ''].includes(cur) ? [...acc, `${cur}\n`] : acc
+        !['\n', ''].includes(cur) ? [...acc, `${filter(cur)}\n`] : acc
       ), [])
     }
     if (optionValue1.includes('no-change-line')) {
       return texts.reduce((acc: string[], cur) => (
-        !['\n', ''].includes(cur) ? [...acc, `${cur.replace(/\n/g, '')}`] : acc
+        !['\n', ''].includes(cur) ? [...acc, `${filter(cur).replace(/\n/g, '')}`] : acc
       ), [])
     }
     return Array.isArray(optionValue1) ? optionValue1 : []
