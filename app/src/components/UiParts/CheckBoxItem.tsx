@@ -1,4 +1,4 @@
-import { ChangeEvent, VFC } from 'react'
+import { ChangeEvent, memo, VFC } from 'react'
 
 type Props = {
   type: 'checkbox' | 'radio';
@@ -12,7 +12,7 @@ type Props = {
   value: string[];
 }
 
-export const CheckBoxItem: VFC<Props> = props => {
+export const CheckBoxItem: VFC<Props> = memo(props => {
   return (
     <section>
       {
@@ -23,7 +23,7 @@ export const CheckBoxItem: VFC<Props> = props => {
         props.items.map(({ id, label }) => (
           <div key={id}>
             <input
-              name={props.label}
+              name={props.id}
               type={props.type}
               id={id}
               onChange={props.onChange}
@@ -39,4 +39,4 @@ export const CheckBoxItem: VFC<Props> = props => {
       }
     </section>
   )
-}
+})

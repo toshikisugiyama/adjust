@@ -1,4 +1,4 @@
-import { ChangeEvent, VFC } from 'react'
+import { ChangeEvent, memo, VFC } from 'react'
 
 type Props = {
   type: 'text' | 'textarea';
@@ -7,7 +7,7 @@ type Props = {
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
-export const TextBoxItem: VFC<Props> = props => {
+export const TextBoxItem: VFC<Props> = memo(props => {
   return (
     <div className='flex flex-col'>
       <label
@@ -30,4 +30,4 @@ export const TextBoxItem: VFC<Props> = props => {
       }
     </div>
   )
-}
+})

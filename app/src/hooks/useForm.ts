@@ -30,13 +30,13 @@ export const useForm = (group?: Checkbox[]) => {
       return
     }
     setVal(item => (<string[]>item).filter(item => item !== id))
-  }, [])
+  }, [val, group])
 
   useEffect(() => {
     if (group != null && !val.length) {
       setVal(() => [group[0].id])
     }
-  }, [val])
+  }, [val, group])
 
   return {
     val,
