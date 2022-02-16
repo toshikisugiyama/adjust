@@ -95,13 +95,21 @@ const Home: NextPage = () => {
     return Array.isArray(optionValue2) ? optionValue2 : []
   }, [optionValue1, optionValue2])
 
+  const optionFilter3 = useCallback((texts: string[]) => (
+    optionValue3.includes('desc')
+      ? texts.sort()
+      : optionValue3.includes('asc')
+        ? texts.sort(() => -1)
+        : texts
+  ), [optionValue3])
+
   const adjustedContent = useMemo(() => {
     if (Array.isArray(contentValue)) return ''
     const dummy: string = 'z?d}&#Pv[}M>#S3W'
     let target: string[] = contentValue.replace(/\r?\n/g, `${dummy}\n${dummy}`).split(dummy)
-    target = optionFilter2(optionFilter1(target))
+    target = optionFilter3(optionFilter2(optionFilter1(target)))
     return target.join('')
-  }, [contentValue, optionValue1, optionFilter1, optionFilter2])
+  }, [contentValue, optionValue1, optionFilter1, optionFilter2, optionFilter3])
 
   const reset = useCallback((e: MouseEvent<HTMLElement>) => {
     resetContentForm(e)
