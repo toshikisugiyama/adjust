@@ -4,7 +4,7 @@ import { useForm } from '@/hooks/useForm'
 import { TextBoxItem } from '@/components/UiParts/TextBoxItem'
 import { CheckBoxItem } from '@/components/UiParts/CheckBoxItem'
 import { Checkbox } from '@/types'
-import { useCallback, useMemo } from 'react'
+import { MouseEvent, useCallback, useMemo } from 'react'
 import { useAppInfo } from '@/hooks/useAppInfo'
 
 const Home: NextPage = () => {
@@ -50,16 +50,19 @@ const Home: NextPage = () => {
   const {
     val: optionValue1,
     handleForm: handleOptionValue1,
+    reset: resetOptionValue1,
   } = useForm(options1)
 
   const {
     val: optionValue2,
     handleForm: handleOptionValue2,
+    reset: resetOptionValue2,
   } = useForm(options2)
 
   const {
     val: optionValue3,
     handleForm: handleOptionValue3,
+    reset: resetOptionValue3,
   } = useForm(options3)
 
   const optionFilter1 = useCallback((texts: string[]): string[] => {
@@ -100,6 +103,13 @@ const Home: NextPage = () => {
     return target.join('')
   }, [contentValue, optionValue1, optionFilter1, optionFilter2])
 
+  const reset = useCallback((e: MouseEvent<HTMLElement>) => {
+    resetContentForm(e)
+    resetOptionValue1(e)
+    resetOptionValue2(e)
+    resetOptionValue3(e)
+  }, [resetContentForm, resetOptionValue1, resetOptionValue2, resetOptionValue3])
+
   return (
     <Layout>
       <h1 className='
@@ -117,7 +127,7 @@ const Home: NextPage = () => {
       <form>
         <div className='mt-10 relative'>
           <button
-            onClick={resetContentForm}
+            onClick={reset}
             disabled={!contentValue.length}
             className={`
               absolute

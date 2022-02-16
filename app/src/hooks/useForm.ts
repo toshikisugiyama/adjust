@@ -32,9 +32,8 @@ export const useForm = (group?: Checkbox[]) => {
     setVal(item => (<string[]>item).filter(item => item !== id))
   }, [val, group])
 
-  const reset = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+  const reset = useCallback((e: MouseEvent<HTMLElement>) => {
     e.preventDefault()
-    console.log('aaaa')
     if (!val.length) return
     setVal('')
   }, [val])
