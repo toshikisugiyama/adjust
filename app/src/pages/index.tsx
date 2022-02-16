@@ -13,22 +13,33 @@ const Home: NextPage = () => {
 
   const options1: Checkbox[] = [{
     id: 'remove-empty-line',
-    label: '空行を排除',
+    label: 'Remove Empty Lines',
   }, {
     id: 'no-change-line',
-    label: '改行を排除',
+    label: 'Remove Change Lines',
   }]
 
   const options2: Checkbox[] = [{
-    id: 'not-cepalate',
-    label: '区切らない',
+    id: 'sepalate-with-space',
+    label: 'Separate with Space',
   }, {
     id: 'cepalate-with-comma',
-    label: 'カンマで区切る',
+    label: 'Separate with Comma (,)',
   }, {
     id: 'cepalate-with-semicolon',
-    label: 'セミコロンで区切る',
-  },]
+    label: 'Separate with Semicolon (;)',
+  }]
+
+  const options3: Checkbox[] = [{
+    id: 'no-sort',
+    label: 'No Sort',
+  }, {
+    id: 'desc',
+    label: 'DESC',
+  }, {
+    id: 'asc',
+    label: 'ASC',
+  }]
 
   const {
     val: contentValue,
@@ -44,6 +55,11 @@ const Home: NextPage = () => {
     val: optionValue2,
     handleForm: handleOptionValue2,
   } = useForm(options2)
+
+  const {
+    val: optionValue3,
+    handleForm: handleOptionValue3,
+  } = useForm(options3)
 
   const optionFilter1 = useCallback((texts: string[]): string[] => {
     if (optionValue1.includes('remove-empty-line')) {
@@ -69,7 +85,7 @@ const Home: NextPage = () => {
         return [...acc, `${cur}${cepalater}${suffix}`.replace(/  /g, ' ')]
       }, [])
     }
-    if (optionValue2.includes('not-cepalate')) return filter(' ')
+    if (optionValue2.includes('sepalate-with-space')) return filter(' ')
     if (optionValue2.includes('cepalate-with-comma')) return filter(',')
     if (optionValue2.includes('cepalate-with-semicolon')) return filter(';')
     return Array.isArray(optionValue2) ? optionValue2 : []
@@ -90,43 +106,55 @@ const Home: NextPage = () => {
         font-bold
         text-center
       '>{title}</h1>
+      <div className='mt-10 border border-black p-5'>
+        {
+          !adjustedContent.length
+            ? <p className='text-center text-lg font-bold'>I will display the result here.</p>
+            : <pre>{adjustedContent}</pre>
+        }
+      </div>
       <form>
         <div className='mt-10'>
-          <CheckBoxItem
-            label='Select Us!'
-            type='radio'
-            id='option1'
-            onChange={handleOptionValue1}
-            items={options1}
-            value={Array.isArray(optionValue1) ? optionValue1 : []}
-          />
-        </div>
-        <div className='mt-10'>
-          <CheckBoxItem
-            label='Select Us!'
-            type='radio'
-            id='option2'
-            onChange={handleOptionValue2}
-            items={options2}
-            value={Array.isArray(optionValue2) ? optionValue2 : []}
-          />
-        </div>
-        <div className='mt-10'>
           <TextBoxItem
-            label='Contents'
+            label='Input texts!'
             id='content'
             type='textarea'
             onChange={handleContentForm}
           />
         </div>
+        <div className='grid grid-cols-3 gap-4'>
+          <div className='mt-10'>
+            <CheckBoxItem
+              label='Select Us!'
+              type='radio'
+              id='option1'
+              onChange={handleOptionValue1}
+              items={options1}
+              value={Array.isArray(optionValue1) ? optionValue1 : []}
+            />
+          </div>
+          <div className='mt-10'>
+            <CheckBoxItem
+              label='Select Us!'
+              type='radio'
+              id='option2'
+              onChange={handleOptionValue2}
+              items={options2}
+              value={Array.isArray(optionValue2) ? optionValue2 : []}
+            />
+          </div>
+          <div className='mt-10'>
+            <CheckBoxItem
+              label='Select Us!'
+              type='radio'
+              id='option3'
+              onChange={handleOptionValue3}
+              items={options3}
+              value={Array.isArray(optionValue3) ? optionValue3 : []}
+            />
+          </div>
+        </div>
       </form>
-      <div className='mt-10 border border-black p-5'>
-        {
-          !adjustedContent.length
-            ? <p className='text-center'>The result will be displayed here.</p>
-            : <pre>{adjustedContent}</pre>
-        }
-      </div>
     </Layout>
   )
 }
